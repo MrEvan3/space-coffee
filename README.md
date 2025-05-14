@@ -48,10 +48,27 @@ Este é o projeto da tela inicial da Space Coffee, uma cafeteria com tema espaci
 
 ## Tecnologias Utilizadas
 
+### Frameworks e Bibliotecas
+- **Bootstrap 5.3.0**
+  - Framework CSS para layout responsivo
+  - Sistema de grid
+  - Componentes pré-estilizados
+  - JavaScript para interatividade
+
+- **Font Awesome 6.0.0**
+  - Biblioteca de ícones
+  - Ícones vetoriais escaláveis
+  - Grande variedade de ícones disponíveis
+
+### Linguagens
 - HTML5
 - CSS3
-- Bootstrap 5
-- Font Awesome
+- JavaScript
+
+### Recursos Externos
+- CDN do Bootstrap
+- CDN do Font Awesome
+- Fontes do Google Fonts
 
 ## Estrutura do Projeto
 
