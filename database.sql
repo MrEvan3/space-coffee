@@ -1,8 +1,18 @@
+-- =============================================
+-- Space Coffee - Sistema de Gerenciamento
+-- =============================================
+-- Este script cria a estrutura do banco de dados
+-- para o sistema de gerenciamento da Space Coffee
+-- =============================================
+
 -- Criação do banco de dados
 CREATE DATABASE IF NOT EXISTS space_coffee;
 USE space_coffee;
 
--- Criação da tabela de produtos
+-- =============================================
+-- Tabela: produtos
+-- Armazena informações sobre os produtos da cafeteria
+-- =============================================
 CREATE TABLE produtos (
     id_produto INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -13,7 +23,10 @@ CREATE TABLE produtos (
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Criação da tabela de pedidos
+-- =============================================
+-- Tabela: pedidos
+-- Registra os pedidos feitos pelos clientes
+-- =============================================
 CREATE TABLE pedidos (
     id_pedido INT PRIMARY KEY AUTO_INCREMENT,
     data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -22,7 +35,12 @@ CREATE TABLE pedidos (
     observacoes TEXT
 );
 
--- Criação da tabela de itens do pedido (tabela de relacionamento)
+-- =============================================
+-- Tabela: itens_pedido
+-- Tabela de relacionamento que conecta produtos e pedidos
+-- Permite que um pedido tenha vários produtos e
+-- que um produto possa estar em vários pedidos
+-- =============================================
 CREATE TABLE itens_pedido (
     id_item INT PRIMARY KEY AUTO_INCREMENT,
     id_pedido INT NOT NULL,
@@ -32,6 +50,10 @@ CREATE TABLE itens_pedido (
     FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
     FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
 );
+
+-- =============================================
+-- Inserção de dados de exemplo
+-- =============================================
 
 -- Inserção de produtos
 INSERT INTO produtos (nome, descricao, preco, categoria, estoque) VALUES
@@ -47,7 +69,7 @@ INSERT INTO pedidos (status_pedido, valor_total, observacoes) VALUES
 
 -- Inserção de itens do pedido
 INSERT INTO itens_pedido (id_pedido, id_produto, quantidade, preco_unitario) VALUES
-(1, 1, 2, 5.90),
-(2, 2, 1, 8.90),
-(2, 3, 1, 12.90),
-(3, 2, 1, 8.90); 
+(1, 1, 2, 5.90),  -- 2 cafés expresso no pedido 1
+(2, 2, 1, 8.90),  -- 1 cappuccino no pedido 2
+(2, 3, 1, 12.90), -- 1 bolo de chocolate no pedido 2
+(3, 2, 1, 8.90);  -- 1 cappuccino no pedido 3 
