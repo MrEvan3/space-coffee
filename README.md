@@ -1,82 +1,68 @@
-# Space Coffee - Tela Inicial
+# Space Coffee - Sistema de Gerenciamento
 
-Este é o projeto da tela inicial da Space Coffee, uma cafeteria com tema espacial.
+Este repositório contém o sistema de gerenciamento da Space Coffee, incluindo a interface web e o banco de dados.
 
-## Requisitos Funcionais
+## Estrutura do Banco de Dados
 
-1. **Navegação**
-   - Menu de navegação com links para Início, Cardápio, Sobre e Contato
-   - Navegação responsiva com menu hamburguer para dispositivos móveis
+O banco de dados está definido no arquivo `database.sql` e contém as seguintes tabelas:
 
-2. **Cardápio**
-   - Exibição de três categorias: Cafés, Salgados e Especiais
-   - Cada categoria deve mostrar:
-     - Imagem ilustrativa
-     - Lista de produtos com preços
-     - Botão "Fazer Pedido" para cada categoria
+- `produtos`: Armazena informações sobre os produtos da cafeteria
+- `pedidos`: Registra os pedidos feitos pelos clientes
+- `itens_pedido`: Tabela de relacionamento entre produtos e pedidos
 
-3. **Informações da Cafeteria**
-   - Exibição do horário de funcionamento
-   - Seção "Sobre" com descrição da cafeteria
-   - Informações de contato no rodapé
+## Como Executar o Banco de Dados
 
-## Requisitos Não Funcionais
+1. Certifique-se de ter o MySQL instalado em sua máquina
+2. Abra o terminal ou prompt de comando
+3. Execute o seguinte comando para acessar o MySQL:
+   ```bash
+   mysql -u seu_usuario -p
+   ```
+4. Digite sua senha quando solicitado
+5. Execute o script SQL:
+   ```bash
+   source caminho/para/database.sql
+   ```
 
-1. **Usabilidade**
-   - Interface intuitiva e fácil de navegar
-   - Design responsivo para diferentes tamanhos de tela
-   - Tempo de carregamento otimizado
+## Verificando o Banco de Dados
 
-2. **Design**
-   - Tema espacial com cores laranja e preto
-   - Logo e elementos visuais alinhados com a identidade da marca
-   - Tipografia legível e hierarquia visual clara
+Após executar o script, você pode verificar se as tabelas foram criadas corretamente usando os seguintes comandos:
 
-3. **Performance**
-   - Carregamento rápido das imagens
-   - Compatibilidade com diferentes navegadores
-   - Código otimizado e bem estruturado
+```sql
+USE space_coffee;
+SHOW TABLES;
+SELECT * FROM produtos;
+SELECT * FROM pedidos;
+SELECT * FROM itens_pedido;
+```
 
-4. **Acessibilidade**
-   - Textos com contraste adequado
-   - Imagens com textos alternativos
-   - Estrutura semântica HTML
+## Estrutura das Tabelas
 
-## Tecnologias Utilizadas
+### Tabela produtos
+- id_produto (INT, PRIMARY KEY)
+- nome (VARCHAR)
+- descricao (TEXT)
+- preco (DECIMAL)
+- categoria (VARCHAR)
+- estoque (INT)
+- data_cadastro (TIMESTAMP)
 
-### Frameworks e Bibliotecas
-- **Bootstrap 5.3.0**
-  - Framework CSS para layout responsivo
-  - Sistema de grid
-  - Componentes pré-estilizados
-  - JavaScript para interatividade
+### Tabela pedidos
+- id_pedido (INT, PRIMARY KEY)
+- data_pedido (TIMESTAMP)
+- status_pedido (ENUM)
+- valor_total (DECIMAL)
+- observacoes (TEXT)
 
-- **Font Awesome 6.0.0**
-  - Biblioteca de ícones
-  - Ícones vetoriais escaláveis
-  - Grande variedade de ícones disponíveis
+### Tabela itens_pedido
+- id_item (INT, PRIMARY KEY)
+- id_pedido (INT, FOREIGN KEY)
+- id_produto (INT, FOREIGN KEY)
+- quantidade (INT)
+- preco_unitario (DECIMAL)
 
-### Linguagens
-- HTML5
-- CSS3
-- JavaScript
+## Relacionamentos
 
-### Recursos Externos
-- CDN do Bootstrap
-- CDN do Font Awesome
-- Fontes do Google Fonts
-
-## Estrutura do Projeto
-
-- `index.html` - Estrutura principal da página
-- `styles.css` - Estilos personalizados
-- `logo.png` - Logo da Space Coffee
-- `coffee-moon.png` - Imagem ilustrativa da seção hero
-
-## Autor
-
-Evandro Lemos
-
-## Licença
-
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+- Um pedido pode ter vários itens (1:N)
+- Um produto pode estar em vários itens de pedido (1:N)
+- A tabela itens_pedido faz a ligação entre pedidos e produtos (N:M)
