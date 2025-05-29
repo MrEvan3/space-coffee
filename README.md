@@ -1,36 +1,65 @@
 # Space Coffee - Sistema de Gerenciamento
 
-Este projeto contém a estrutura do banco de dados para o sistema de gerenciamento da Space Coffee.
+Este repositório contém o sistema de gerenciamento da Space Coffee, incluindo a interface web e o banco de dados.
 
 ## Estrutura do Banco de Dados
 
-### Tabela: produtos
-- id_produto (INT, PK): Identificador único do produto
-- nome (VARCHAR): Nome do produto
-- descricao (TEXT): Descrição detalhada do produto
-- preco (DECIMAL): Preço do produto
-- categoria (VARCHAR): Categoria do produto (Café, Sobremesa, etc.)
-- estoque (INT): Quantidade disponível em estoque
-- data_cadastro (TIMESTAMP): Data de cadastro do produto
+O banco de dados está definido no arquivo `database.sql` e contém as seguintes tabelas:
 
-### Tabela: pedidos
-- id_pedido (INT, PK): Identificador único do pedido
-- data_pedido (TIMESTAMP): Data e hora do pedido
-- status_pedido (ENUM): Status atual do pedido
-- valor_total (DECIMAL): Valor total do pedido
-- observacoes (TEXT): Observações adicionais
+- `produtos`: Armazena informações sobre os produtos da cafeteria
+- `pedidos`: Registra os pedidos feitos pelos clientes
+- `itens_pedido`: Tabela de relacionamento entre produtos e pedidos
 
-### Tabela: itens_pedido
-- id_item (INT, PK): Identificador único do item
-- id_pedido (INT, FK): Referência ao pedido
-- id_produto (INT, FK): Referência ao produto
-- quantidade (INT): Quantidade do produto no pedido
-- preco_unitario (DECIMAL): Preço unitário do produto no momento do pedido
+## Como Executar o Banco de Dados
 
-## Como Executar
+1. Certifique-se de ter o MySQL instalado em sua máquina
+2. Abra o terminal ou prompt de comando
+3. Execute o seguinte comando para acessar o MySQL:
+   ```bash
+   mysql -u seu_usuario -p
+   ```
+4. Digite sua senha quando solicitado
+5. Execute o script SQL:
+   ```bash
+   source caminho/para/database.sql
+   ```
 
-1. Execute o script `database.sql` em seu servidor MySQL
-2. O banco de dados será criado automaticamente com algumas amostras de dados
+## Verificando o Banco de Dados
+
+Após executar o script, você pode verificar se as tabelas foram criadas corretamente usando os seguintes comandos:
+
+```sql
+USE space_coffee;
+SHOW TABLES;
+SELECT * FROM produtos;
+SELECT * FROM pedidos;
+SELECT * FROM itens_pedido;
+```
+
+## Estrutura das Tabelas
+
+### Tabela produtos
+- id_produto (INT, PRIMARY KEY)
+- nome (VARCHAR)
+- descricao (TEXT)
+- preco (DECIMAL)
+- categoria (VARCHAR)
+- estoque (INT)
+- data_cadastro (TIMESTAMP)
+
+### Tabela pedidos
+- id_pedido (INT, PRIMARY KEY)
+- data_pedido (TIMESTAMP)
+- status_pedido (ENUM)
+- valor_total (DECIMAL)
+- observacoes (TEXT)
+
+### Tabela itens_pedido
+- id_item (INT, PRIMARY KEY)
+- id_pedido (INT, FOREIGN KEY)
+- id_produto (INT, FOREIGN KEY)
+- quantidade (INT)
+- preco_unitario (DECIMAL)
 
 ## Relacionamentos
 
