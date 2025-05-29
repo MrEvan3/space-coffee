@@ -12,7 +12,7 @@ O banco de dados está definido no arquivo `database.sql` e contém as seguintes
 
 ## Como Executar o Banco de Dados
 
-1. Certifique-se de ter o MySQL instalado em sua máquina
+1. Ter o MySQL instalado em sua máquina
 2. Abra o terminal ou prompt de comando
 3. Execute o seguinte comando para acessar o MySQL:
    ```bash
@@ -26,7 +26,7 @@ O banco de dados está definido no arquivo `database.sql` e contém as seguintes
 
 ## Verificando o Banco de Dados
 
-Após executar o script, você pode verificar se as tabelas foram criadas corretamente usando os seguintes comandos:
+Após executar o script, verificar se as tabelas foram criadas corretamente usando os seguintes comandos:
 
 ```sql
 USE space_coffee;
